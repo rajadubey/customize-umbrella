@@ -1,65 +1,78 @@
-*{
+* {
     padding: 0;
     margin: 0;
-
 }
-body{
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    font-family: 'Poppins', sans-serif;
+.hide {
+    display: none;
 }
-.all-center{
+.all-center {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.view{
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    font-family: 'Poppins', sans-serif;
+    background: rgba(0, 0, 255, 0.123);
+}
+
+
+.view {
     width: 60%;
     height: 100%;
 }
 
-.umbrella{
+.umbrella {
     width: 70%;
     height: 80%;
-    -webkit-transition:2s color;
-    -moz-transition:2s color;
-    transition:2s color;
+    -webkit-transition: 2s color;
+    -moz-transition: 2s color;
+    transition: 2s color;
 }
-.loader{
+
+.loader {
     width: 30%;
     height: 30%;
     opacity: 0.5;
 }
+
 @keyframes loader-spin {
     from {
-      transform: rotate(0deg);
+        transform: rotate(0deg);
     }
     to {
-      transform: rotate(360deg);
+        transform: rotate(360deg);
     }
-  }
+}
 
-  @media (prefers-reduced-motion: no-preference) {
+@media (prefers-reduced-motion: no-preference) {
     .loader {
-      animation: loader-spin infinite 3s linear;
+        animation: loader-spin infinite 3s linear;
     }
-  }
+}
+.logo {
+    position: absolute;
+    width: 64px;
+    top: 82%;
+}
 
 
-.controller{
+/*--------------------------------- Controllers -------------------------------------- */
+.controller {
     width: 40%;
     height: 80%;
-    flex-direction:column;
+    flex-direction: column;
     align-items: flex-start;
 }
-.title{
+
+.title {
     font-weight: bold;
     font-size: 35px;
 }
 
-
-button{
+button {
     outline: thin;
     background: none;
     padding: 12px;
@@ -68,71 +81,56 @@ button{
     cursor: pointer;
     color: white;
 }
-.color-button{
 
+.color-button {
     width: 20%;
     display: flex;
     justify-content: space-around;
     margin: 10px 0 25px 10px;
 }
 
-#blue-button{
+#blue-button {
     color: blue;
     background: blue;
 }
-#pink-button{
+
+#pink-button {
     color: pink;
     background: pink;
 }
-#yellow-button{
+
+#yellow-button {
     color: yellow;
     background: yellow;
 }
-.hide{
-    display: none;
-}
 
-.instructions{
+
+
+.instructions {
     display: flex;
     flex-direction: column;
 }
 
-.instructions h5{
+.instructions h5 {
     font-size: 16px;
-    margin-bottom:3px;
+    margin-bottom: 3px;
 }
-.instructions h6{
-    font-weight: normal;
+
+.instructions h6 {
+    font-weight: bold;
     margin-bottom: 6px;
 }
 
-.instructions p{
+.instructions p {
     display: flex;
-    font-size: 12px;
+    font-size: 11px;
     margin: 10px;
     margin-left: 0;
 }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-.logo{
-    position: absolute;
-    width: 64px;
-    top: 82%;
-}
-
-.upload-button{
+.upload-button {
     display: flex;
     width: 60%;
     justify-content: space-around;
@@ -142,32 +140,31 @@ button{
     color: white;
     font-weight: 800;
 }
-#uploader{
+
+#uploader {
     width: 90%;
     border: none;
-
     border-radius: 0;
     display: flex;
     align-items: center;
-
 }
-#delete-button{
-    width: 10%;
-    border: none;
-    margin-right: 10px;
-    font-size: 19px;
-    font-family: cursive;
-}
-
-#file-name{
+#file-name {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 80%;
     overflow: hidden;
-
+    font-weight: bold;
 }
-.uploader-icon{
-
-   filter: invert();
+.uploader-icon {
+    filter: invert();
+}
+#delete-button {
+    width: 10%;
+    border: none;
+    border-left: 1px solid white;
+    margin-right: 10px;
+    font-size: 19px;
+    font-family: cursive;
+    height: 100%;
 }

@@ -8,70 +8,86 @@ const logoImage = document.getElementById('logo')
 const loader = document.getElementById('loader');
 const body = document.getElementById('body');
 const fileNameLabel = document.getElementById('file-name');
+const favIcon = document.querySelector("link[rel*='icon']");
 
 const BLUE = 'blue';
 const PINK = 'pink';
 const YELLOW = 'yellow';
 
-let currentUmbrella = BLUE;
+// store the current umbrella color to avoid the loading of same image
+let currentUmbrellaColor = BLUE;
 
-
-
-const delay = (umbrella, loader) =>{
-
-    loader.classList.remove('hide')
+// used to provide loading effect when umbrella color is changed or logo is applied
+const showLoader = () =>{
+    if(logoImage.getAttribute('src') !=='#') logoImage.classList.add('hide');
+    loader.classList.remove('hide');
     setTimeout(()=>{
-        loader.classList.add('hide')
-        umbrella.classList.remove('hide')
+        loader.classList.add('hide');
+        umbrella.classList.remove('hide');
+        if(logoImage.getAttribute('src') !=='#') logoImage.classList.remove('hide')
     }, 2000);
 }
 
 
 
-
+// changes the visible umbrella to pink colored umbrella
 pinkButton.addEventListener('click', ()=> {
-    if(currentUmbrella === PINK) return;
-    currentUmbrella = PINK;
+    if(currentUmbrellaColor === PINK) return;
+    currentUmbrellaColor = PINK;
+
     umbrella.classList.add('hide');
-    delay(umbrella, loader);
-    umbrella.setAttribute('src', 'images/Pink umbrella.png');
-    body.style.backgroundColor = '#fff1fa';
+    showLoader();
+    umbrella.setAttribute('src', 'images/Pink%20umbrella.png');
+    favIcon.setAttribute('href', 'images/Pink%20umbrella.png');
+
+    body.style.backgroundColor = 'rgba(225, 0, 255, 0.141)';
 });
 
+// changes the visible umbrella to yellow colored umbrella
 blueButton.addEventListener('click', ()=>{
-    if(currentUmbrella === BLUE) return;
-    currentUmbrella = BLUE;
+    if(currentUmbrellaColor === BLUE) return;
+    currentUmbrellaColor = BLUE;
 
     umbrella.classList.add('hide');
-    delay(umbrella,loader);
-    umbrella.setAttribute('src','images/Blue umbrella.png');
-    body.style.backgroundColor = '#e0e0ff';
+    showLoader();
+    umbrella.setAttribute('src','images/Blue%20umbrella.png');
+    favIcon.setAttribute('href','images/Blue%20umbrella.png');
+
+    body.style.backgroundColor = 'rgba(0, 0, 255, 0.123)';
 });
 
+// changes the visible umbrella to yellow colored umbrella
 yellowButton.addEventListener('click', ()=>{
-    if(currentUmbrella === YELLOW) return;
-    currentUmbrella = YELLOW;
+    if(currentUmbrellaColor === YELLOW) return;
+    currentUmbrellaColor = YELLOW;
 
     umbrella.classList.add('hide');
-    delay(umbrella,loader);
-    umbrella.setAttribute('src','images/Yello umbrella.png');
+    showLoader();
+    umbrella.setAttribute('src','images/Yello%20umbrella.png');
+    favIcon.setAttribute('href','images/Yello%20umbrella.png');
+
     body.style.backgroundColor = '#ffffe3';
 });
 
+// this function is used to show delete button if logo is applied
 const showDeleteButton = (file) =>{
     logoFile.classList.add('hide');
     deleteButton.classList.remove('hide')
     fileNameLabel.innerText=file.split('\\')[2].toUpperCase();
 }
 
+
 deleteButton.addEventListener('click', ()=>{
     logoImage.setAttribute('src', '#');
     logoImage.classList.add('hide')
     deleteButton.classList.add('hide');
-    fileNameLabel.innerText='Upload Logo'
+    fileNameLabel.innerText='Upload Logo';
+    logoFile.value=null;
 })
 
-const handler = (event)=>{
+// when logo file is uploaded, this function handles the visibility of every element related to the file
+const uploadHandler = (event)=>{
+    console.log('Event triggered')
     const file = event.target.files[0];
     if(!file) {
         console.log('Choose one file!');
@@ -82,18 +98,23 @@ const handler = (event)=>{
         console.error('File size Exceed the limit !!', `File Size: ${fileSize}`)
         return;
     }
+    //creating a fake url for logo
     const url = URL.createObjectURL(file);
     umbrella.classList.add('hide');
-    delay(umbrella, loader);
+
+    showLoader();
+
     logoImage.setAttribute('src', url);
     logoImage.classList.remove('hide')
     showDeleteButton(event.target.value);
 };
 
+//
+logoFile.addEventListener('change',uploadHandler)
 
-logoFile.addEventListener('change',handler)
 
-
+// this uploader element is used since styling of input[type='file'] is not supported across all browsers
+// hence we have a button which on click, calls the change event of file type input.
 document.getElementById('uploader').addEventListener('click', ()=>{
     logoFile.click();
-})
+});
